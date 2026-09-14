@@ -6,6 +6,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Flower2,
+  Ghost,
+  Instagram,
   KeyRound,
   LockKeyhole,
   RotateCcw,
@@ -272,7 +274,18 @@ export function MemoryJourney() {
           <aside className="border-l border-border pl-6">
             <p className="text-xs uppercase text-muted-foreground">Words to find</p>
             <ul className="mt-5 space-y-3">
-              {c.wordSearch.words.map((word) => <li key={word.label} className={cn("flex items-center gap-2 font-serif text-lg", foundWords.includes(word.label) ? "text-accent-foreground line-through" : "text-foreground/60")}><Check className={cn("h-4 w-4", !foundWords.includes(word.label) && "opacity-0")} />{word.label}</li>)}
+              {c.wordSearch.words.map((word) => {
+                const found = foundWords.includes(word.label);
+                return (
+                  <li key={word.label} className={cn("flex items-start gap-2 font-serif text-lg", found ? "text-accent-foreground line-through" : "text-foreground/60")}>
+                    <Check className={cn("mt-1.5 h-4 w-4 shrink-0", !found && "opacity-0")} />
+                    <span>
+                      {found || !word.mask ? word.label : word.mask}
+                      {!found && word.hint && <span className="mt-1 block font-sans text-xs italic leading-5 text-muted-foreground">{word.hint}</span>}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
             {selectedCells.length > 0 && <Button variant="ghost" size="sm" className="mt-6" onClick={() => setSelectedCells([])}>Clear selection</Button>}
             {puzzleComplete && <p className="mt-7 border-t border-border pt-5 font-serif text-xl text-accent-foreground">{c.wordSearch.completion}</p>}
@@ -387,7 +400,28 @@ export function MemoryJourney() {
             </div>
           </div>
         </div>
-        <footer className="mt-16 text-center text-xs uppercase text-muted-foreground">Made quietly · for {c.person} · {c.date.display}</footer>
+      </Chapter>
+
+      <Chapter id="contact" number="11" eyebrow={c.contact.eyebrow} className="bg-secondary/55 pb-28">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="font-serif text-5xl leading-tight sm:text-6xl">{c.contact.title}</h2>
+          <p className="mx-auto mt-6 max-w-xl leading-8 text-muted-foreground">{c.contact.note}</p>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            <a href={c.contact.snapchat.url} target="_blank" rel="noopener noreferrer" aria-label={`Message ${c.contact.snapchat.handle} on ${c.contact.snapchat.label}`} className="letter-card letter-sheet group flex flex-col items-center px-8 py-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Ghost className="h-9 w-9 text-accent-foreground transition-transform group-hover:-rotate-6" strokeWidth={1.25} />
+              <p className="mt-5 text-xs uppercase text-muted-foreground">{c.contact.snapchat.label}</p>
+              <p className="mt-2 font-serif text-2xl">{c.contact.snapchat.handle}</p>
+              <span className="mt-6 border-t border-border pt-4 text-xs uppercase text-accent-foreground">Message any time</span>
+            </a>
+            <a href={c.contact.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={`Message ${c.contact.instagram.handle} on ${c.contact.instagram.label}`} className="letter-card letter-sheet group flex flex-col items-center px-8 py-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Instagram className="h-9 w-9 text-accent-foreground transition-transform group-hover:-rotate-6" strokeWidth={1.25} />
+              <p className="mt-5 text-xs uppercase text-muted-foreground">{c.contact.instagram.label}</p>
+              <p className="mt-2 font-serif text-2xl">{c.contact.instagram.handle}</p>
+              <span className="mt-6 border-t border-border pt-4 text-xs uppercase text-accent-foreground">Message any time</span>
+            </a>
+          </div>
+        </div>
+        <footer className="mt-20 text-center text-xs uppercase text-muted-foreground">Made quietly · for {c.person} · {c.date.display}</footer>
       </Chapter>
 
       {letterIndex !== null && c.letters[letterIndex] && (
