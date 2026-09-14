@@ -5,6 +5,16 @@
  */
 export type GridCell = [row: number, column: number];
 
+export type WordEntry = {
+  /** Internal match key. Also what is shown once the word is found. */
+  label: string;
+  /** Optional censored display shown in the word list until the word is found. */
+  mask?: string;
+  /** Optional hint shown under the mask until the word is found. */
+  hint?: string;
+  cells: GridCell[];
+};
+
 export const manniConfig = {
   person: "Manni",
   date: {
@@ -88,14 +98,19 @@ export const manniConfig = {
       "GENTLEASDFGHJ",
     ],
     words: [
-      { label: "I LOVE YOU MOMMY", cells: [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11],[0,12]] as GridCell[] },
-      { label: "MANNI", cells: [[2,0],[2,1],[2,2],[2,3],[2,4]] as GridCell[] },
-      { label: "HOME", cells: [[4,0],[4,1],[4,2],[4,3]] as GridCell[] },
-      { label: "DECEMBER", cells: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]] as GridCell[] },
-      { label: "CARE", cells: [[8,0],[8,1],[8,2],[8,3]] as GridCell[] },
-      { label: "MEMORY", cells: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]] as GridCell[] },
-      { label: "GENTLE", cells: [[12,0],[12,1],[12,2],[12,3],[12,4],[12,5]] as GridCell[] },
-    ],
+      {
+        label: "I LOVE YOU MOMMY",
+        mask: "·  · · · ·  · · ·  · · · · ·",
+        hint: "Three words you already know by heart. Count the letters, then find them where they hide.",
+        cells: [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11],[0,12]],
+      },
+      { label: "MANNI", cells: [[2,0],[2,1],[2,2],[2,3],[2,4]] },
+      { label: "HOME", cells: [[4,0],[4,1],[4,2],[4,3]] },
+      { label: "DECEMBER", cells: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5],[6,6],[6,7]] },
+      { label: "CARE", cells: [[8,0],[8,1],[8,2],[8,3]] },
+      { label: "MEMORY", cells: [[10,0],[10,1],[10,2],[10,3],[10,4],[10,5]] },
+      { label: "GENTLE", cells: [[12,0],[12,1],[12,2],[12,3],[12,4],[12,5]] },
+    ] as WordEntry[],
     completion: "The second half of the key has found you.",
   },
   lockedBox: {
@@ -164,6 +179,13 @@ export const manniConfig = {
     signature: "With love, always",
     closing: "For Manni. 6 December. Some things are worth saying properly.",
     closeLabel: "Close the book",
+  },
+  contact: {
+    eyebrow: "When you feel like talking",
+    title: "My door is always open",
+    note: "No reply is expected—today or ever. But if you ever want to talk, about anything at all, I am one message away. Any hour, either of these.",
+    snapchat: { label: "Snapchat", handle: "manraj.xp", url: "https://snapchat.com/add/manraj.xp" },
+    instagram: { label: "Instagram", handle: "manraj.xp", url: "https://instagram.com/manraj.xp" },
   },
   audio: {
     src: "/assets/audio/background.mp3",
