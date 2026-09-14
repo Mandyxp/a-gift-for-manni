@@ -8,8 +8,6 @@ import {
   Flower2,
   KeyRound,
   LockKeyhole,
-  Music2,
-  Pause,
   RotateCcw,
   Volume2,
   VolumeX,
@@ -79,6 +77,7 @@ export function MemoryJourney() {
   const [bookClosed, setBookClosed] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const pinchDistanceRef = useRef<number | null>(null);
 
   const canUnlock = quizComplete && puzzleComplete;
   const currentQuestion = c.quiz.questions[quizIndex];
@@ -94,10 +93,6 @@ export function MemoryJourney() {
     () => new Set(c.wordSearch.words.filter((word) => foundWords.includes(word.label)).flatMap((word) => word.cells.map(cellKey))),
     [foundWords, c.wordSearch.words],
   );
-
-  function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 
   function submitQuiz(event: React.FormEvent) {
     event.preventDefault();
@@ -402,7 +397,27 @@ export function MemoryJourney() {
             <Button size="icon" variant="ghost" aria-label="Zoom in" onClick={() => setLetterScale((scale) => Math.min(3, scale + 0.25))}><ZoomIn /></Button>
             <Button size="icon" variant="ghost" aria-label="Close letter" onClick={() => setLetterIndex(null)}><X /></Button>
           </div>
-          <div className="letter-viewer h-[84vh] w-full max-w-3xl overflow-auto overscroll-contain p-4 touch-pan-x touch-pan-y">
+          <div
+            className="letter-viewer h-[84vh] w-full max-w-3xl overflow-auto overscroll-contain p-4 touch-pan-x touch-pan-y"
+            onTouchStart={(event) => {
+              if (event.touches.length !== 2) return;
+              const first = event.touches[0];
+              const second = event.touches[1];
+              if (!first || !second) return;
+              pinchDistanceRef.current = Math.hypot(first.clientX - second.clientX, first.clientY - second.clientY);
+            }}
+            onTouchMove={(event) => {
+              if (event.touches.length !== 2 || pinchDistanceRef.current === null) return;
+              const first = event.touches[0];
+              const second = event.touches[1];
+              if (!first || !second) return;
+              const distance = Math.hypot(first.clientX - second.clientX, first.clientY - second.clientY);
+              const ratio = distance / pinchDistanceRef.current;
+              setLetterScale((scale) => Math.min(3, Math.max(1, scale * ratio)));
+              pinchDistanceRef.current = distance;
+            }}
+            onTouchEnd={() => { pinchDistanceRef.current = null; }}
+          >
             <div className="mx-auto origin-top transition-transform" style={{ transform: `scale(${letterScale})`, width: `${100 / letterScale}%` }}>
               <LetterContent letter={c.letters[letterIndex]} />
             </div>
