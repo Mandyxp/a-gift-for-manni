@@ -1,24 +1,42 @@
-# Unlock without the word search + remove one song
+# Unlock rules, one song removed, better hint, and a more alive page
 
-## 1. Locked folder no longer needs the puzzle
+## 1. The keepsake box rules
 
-Today the "Turn the key" button stays disabled until both the quiz AND the word search are finished (`canUnlock = quizComplete && puzzleComplete` in `src/components/manni/MemoryJourney.tsx`).
+- The word search is no longer required. Finishing the memory quiz alone turns the key.
+- The "Open without the key" shortcut is removed entirely — there is no way past it anymore.
+- Helper line under the disabled button becomes "Answer the memory quiz above to turn the key."
+- Quiz completion copy changes from "The first half of the key is yours." to "The key is yours."
+- The word search stays fully playable and still reveals the hidden phrase; it just no longer gates the box.
 
-Change it so only the memory quiz is required:
+## 2. Remove Summertime Sadness
 
-- `canUnlock` becomes just `quizComplete`.
-- Update the small helper line under the button from "Complete both keepsakes above—or continue without them." to wording about the quiz only (e.g. "Answer the memory quiz above—or continue without it.").
-- Adjust the quiz completion copy in `src/data/config.ts` from "The first half of the key is yours." to "The key is yours." since there is no second half requirement anymore.
-- The word search itself stays exactly as it is — it's still playable, still reveals "I LOVE YOU MOMMY", and the bypass ("Open without the key") still exists.
+The 4.36 MB upload matches the third stored track.
 
-## 2. Remove Summertime Sadness from the hidden playlist
+- Drop that track from the hidden playlist (3 songs remain) and delete its stored pointer.
+- Random start, auto-advance when a song ends, and the shuffle button keep working unchanged.
 
-The 4,365,000-byte upload matches `track-76795895.mp3`, so:
+## 3. Better first quiz hint
 
-- In `src/data/config.ts`: delete the `trackC` import and remove it from `audio.tracks` (leaving 3 tracks).
+- Hint becomes: `"My heart feels like ____ with you."` (answer stays "home", also accepts "our home").
+
+## 4. More animated, dynamic, stylish — with cute touches
+
+Keeping the blush/ivory stationery mood, not adding cartoon clutter:
+
+- Sections fade and rise into view as she scrolls (IntersectionObserver-driven reveal, staggered children).
+- Soft parallax on the opening title and the night-sky distance section; drifting paper particles get a gentler, longer float.
+- Pressed-flower easter egg, quiz key, and the box lid get springier reveal animations; the key "turns" before the lid lifts.
+- Cute-but-tasteful details: tiny hand-drawn hearts and pressed-petal marks as section dividers and list bullets, a small wax-seal motif on the letters folder, a gentle sway on hover for photo prints, ribbon accent on the keepsake box.
+- Buttons and cards get soft lift/press feedback; word-search letters pop when found and the found word draws a hand-inked strikethrough.
+- Everything respects reduced-motion: animations collapse to plain fades or nothing.
+
+## Technical notes
+
+- New keyframes/utilities in `src/styles.css` (reveal, float, sway, seal, ribbon, petal bullets) using existing tokens only — no hardcoded colors.
+- A small `useReveal` hook plus a `Reveal` wrapper inside `src/components/manni/MemoryJourney.tsx`; applied to chapter headers, cards, and gallery items.
+- `canUnlock` becomes `quizComplete`; delete the bypass button; copy edits in `src/data/config.ts` (quiz hint, quiz completion, remove `lockedBox.bypassLabel`, drop one `audio.tracks` entry and its import).
 - Delete `src/assets/track-76795895.mp3.asset.json`.
-- Nothing else changes — random start, auto-advance, and the shuffle button already work with any track count (shuffle only needs 2+).
 
 ## Verify
 
-- Playwright (mobile viewport): unlock button is enabled right after finishing the quiz alone; the three remaining tracks still load; no console errors.
+Playwright on mobile 390 and desktop: scroll reveals fire, key enables after quiz only, no bypass button exists, three tracks load, hint reads correctly, no console errors.
