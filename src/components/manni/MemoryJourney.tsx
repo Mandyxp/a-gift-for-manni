@@ -89,7 +89,18 @@ export function MemoryJourney() {
     if (!audioRef.current) return;
     if (audioOn) void audioRef.current.play().catch(() => setAudioOn(false));
     else audioRef.current.pause();
-  }, [audioOn]);
+  }, [audioOn, trackIndex]);
+
+  function pickAnotherTrack() {
+    const total = c.audio.tracks.length;
+    if (total < 2) return;
+    setTrackIndex((current) => {
+      let next = current;
+      while (next === current) next = Math.floor(Math.random() * total);
+      return next;
+    });
+    setAudioOn(true);
+  }
 
   const cellKey = (cell: GridCell) => `${cell[0]}-${cell[1]}`;
   const foundCellKeys = useMemo(
