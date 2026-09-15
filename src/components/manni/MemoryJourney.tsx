@@ -11,6 +11,7 @@ import {
   KeyRound,
   LockKeyhole,
   RotateCcw,
+  Shuffle,
   Volume2,
   VolumeX,
   X,
@@ -78,6 +79,7 @@ export function MemoryJourney() {
   const [eggOpen, setEggOpen] = useState(false);
   const [bookClosed, setBookClosed] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(() => Math.floor(Math.random() * manniConfig.audio.tracks.length));
   const audioRef = useRef<HTMLAudioElement>(null);
   const pinchDistanceRef = useRef<number | null>(null);
 
@@ -88,7 +90,18 @@ export function MemoryJourney() {
     if (!audioRef.current) return;
     if (audioOn) void audioRef.current.play().catch(() => setAudioOn(false));
     else audioRef.current.pause();
-  }, [audioOn]);
+  }, [audioOn, trackIndex, consented, exited]);
+
+  function pickAnotherTrack() {
+    const total = c.audio.tracks.length;
+    if (total < 2) return;
+    setTrackIndex((current) => {
+      let next = current;
+      while (next === current) next = Math.floor(Math.random() * total);
+      return next;
+    });
+    setAudioOn(true);
+  }
 
   const cellKey = (cell: GridCell) => `${cell[0]}-${cell[1]}`;
   const foundCellKeys = useMemo(
@@ -159,7 +172,7 @@ export function MemoryJourney() {
           <h1 className="font-serif text-7xl leading-none text-primary sm:text-8xl md:text-9xl">{c.person}</h1>
           <div className="mx-auto my-9 h-px w-16 bg-accent-foreground/40" />
           <p className="mx-auto max-w-xl font-serif text-2xl leading-relaxed text-foreground/80 sm:text-3xl">{c.opening.line}</p>
-          <Button size="lg" className="mt-12 min-w-36" onClick={() => setEntered(true)}>
+          <Button size="lg" className="mt-12 min-w-36" onClick={() => { setEntered(true); setAudioOn(true); }}>
             {c.opening.beginLabel} <ArrowDown />
           </Button>
         </div>
@@ -190,13 +203,20 @@ export function MemoryJourney() {
     <main className="paper-noise min-h-screen overflow-hidden bg-background text-foreground">
       <div className="fixed right-3 top-3 z-40 flex items-center gap-1 rounded-md border border-border/70 bg-background/85 p-1 shadow-sm backdrop-blur sm:right-5 sm:top-5">
         {c.audio.available && (
-          <Button size="icon" variant="ghost" aria-label={audioOn ? "Mute background music" : "Play background music"} title={c.audio.label} onClick={() => setAudioOn((value) => !value)}>
-            {audioOn ? <Volume2 /> : <VolumeX />}
-          </Button>
+          <>
+            <Button size="icon" variant="ghost" aria-label={audioOn ? "Mute background music" : "Play background music"} title={c.audio.label} onClick={() => setAudioOn((value) => !value)}>
+              {audioOn ? <Volume2 /> : <VolumeX />}
+            </Button>
+            <Button size="icon" variant="ghost" aria-label={c.audio.shuffleLabel} title={c.audio.shuffleLabel} onClick={pickAnotherTrack}>
+              <Shuffle />
+            </Button>
+          </>
         )}
         <Button size="sm" variant="ghost" onClick={() => setExited(true)} className="text-muted-foreground">Exit</Button>
       </div>
-      {c.audio.available && <audio ref={audioRef} src={c.audio.src} loop preload="none" />}
+      {c.audio.available && (
+        <audio ref={audioRef} src={c.audio.tracks[trackIndex]} preload="none" onEnded={pickAnotherTrack} />
+      )}
 
       <nav aria-label="Journey progress" className="fixed left-0 top-0 z-30 h-1 w-full bg-secondary">
         <div className="journey-progress h-full bg-accent-foreground" />
