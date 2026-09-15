@@ -3,6 +3,15 @@
  * Replace the sample copy and /assets paths below without changing any UI code.
  * Keep the word-search grid rectangular and coordinates zero-based.
  */
+import photo01 from "@/assets/IMG_3460.jpg.asset.json";
+import photo02 from "@/assets/IMG_3464.jpg.asset.json";
+import photo03 from "@/assets/IMG_3462.jpg.asset.json";
+import photo04 from "@/assets/IMG_3463.jpg.asset.json";
+import photo05 from "@/assets/IMG_3461.jpg.asset.json";
+import photo06 from "@/assets/IMG_3465.jpg.asset.json";
+import photo07 from "@/assets/IMG_3102.jpg.asset.json";
+import photo08 from "@/assets/IMG_3531.jpg.asset.json";
+
 export type GridCell = [row: number, column: number];
 
 export type WordEntry = {
