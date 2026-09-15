@@ -11,6 +11,10 @@ import photo05 from "@/assets/IMG_3461.jpg.asset.json";
 import photo06 from "@/assets/IMG_3465.jpg.asset.json";
 import photo07 from "@/assets/IMG_3102.jpg.asset.json";
 import photo08 from "@/assets/IMG_3531.jpg.asset.json";
+import trackA from "@/assets/track-1984aea3.mp3.asset.json";
+import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
+import trackC from "@/assets/track-76795895.mp3.asset.json";
+import trackD from "@/assets/track-e2853fb0.mp3.asset.json";
 
 export type GridCell = [row: number, column: number];
 
@@ -109,8 +113,8 @@ export const manniConfig = {
     words: [
       {
         label: "I LOVE YOU MOMMY",
-        mask: "·  · · · ·  · · ·  · · · · ·",
-        hint: "Three words you already know by heart. Count the letters, then find them where they hide.",
+        mask: "I  L _ _ _   Y _ _   M _ _ _ _",
+        hint: "Four words, 13 letters. The three you said back every night — and the name only you called yourself.",
         cells: [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11],[0,12]],
       },
       { label: "MANNI", cells: [[2,0],[2,1],[2,2],[2,3],[2,4]] },
@@ -202,9 +206,11 @@ export const manniConfig = {
     instagram: { label: "Instagram", handle: "manraj.xp", url: "https://instagram.com/manraj.xp" },
   },
   audio: {
-    src: "/assets/audio/background.mp3",
-    available: false,
+    /** Hidden playlist — order is shuffled at runtime and titles are never shown. */
+    tracks: [trackA.url, trackB.url, trackC.url, trackD.url],
+    available: true,
     label: "Background music",
+    shuffleLabel: "Play something else",
   },
 } as const;
 
