@@ -78,6 +78,7 @@ export function MemoryJourney() {
   const [eggOpen, setEggOpen] = useState(false);
   const [bookClosed, setBookClosed] = useState(false);
   const [audioOn, setAudioOn] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(() => Math.floor(Math.random() * manniConfig.audio.tracks.length));
   const audioRef = useRef<HTMLAudioElement>(null);
   const pinchDistanceRef = useRef<number | null>(null);
 
