@@ -11,6 +11,7 @@ import {
   KeyRound,
   LockKeyhole,
   RotateCcw,
+  Shuffle,
   Volume2,
   VolumeX,
   X,
@@ -202,13 +203,20 @@ export function MemoryJourney() {
     <main className="paper-noise min-h-screen overflow-hidden bg-background text-foreground">
       <div className="fixed right-3 top-3 z-40 flex items-center gap-1 rounded-md border border-border/70 bg-background/85 p-1 shadow-sm backdrop-blur sm:right-5 sm:top-5">
         {c.audio.available && (
-          <Button size="icon" variant="ghost" aria-label={audioOn ? "Mute background music" : "Play background music"} title={c.audio.label} onClick={() => setAudioOn((value) => !value)}>
-            {audioOn ? <Volume2 /> : <VolumeX />}
-          </Button>
+          <>
+            <Button size="icon" variant="ghost" aria-label={audioOn ? "Mute background music" : "Play background music"} title={c.audio.label} onClick={() => setAudioOn((value) => !value)}>
+              {audioOn ? <Volume2 /> : <VolumeX />}
+            </Button>
+            <Button size="icon" variant="ghost" aria-label={c.audio.shuffleLabel} title={c.audio.shuffleLabel} onClick={pickAnotherTrack}>
+              <Shuffle />
+            </Button>
+          </>
         )}
         <Button size="sm" variant="ghost" onClick={() => setExited(true)} className="text-muted-foreground">Exit</Button>
       </div>
-      {c.audio.available && <audio ref={audioRef} src={c.audio.src} loop preload="none" />}
+      {c.audio.available && (
+        <audio ref={audioRef} src={c.audio.tracks[trackIndex]} preload="none" onEnded={pickAnotherTrack} />
+      )}
 
       <nav aria-label="Journey progress" className="fixed left-0 top-0 z-30 h-1 w-full bg-secondary">
         <div className="journey-progress h-full bg-accent-foreground" />
