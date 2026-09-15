@@ -90,7 +90,7 @@ export function MemoryJourney() {
     if (!audioRef.current) return;
     if (audioOn) void audioRef.current.play().catch(() => setAudioOn(false));
     else audioRef.current.pause();
-  }, [audioOn, trackIndex]);
+  }, [audioOn, trackIndex, consented, exited]);
 
   function pickAnotherTrack() {
     const total = c.audio.tracks.length;
