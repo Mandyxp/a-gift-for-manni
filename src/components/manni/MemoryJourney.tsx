@@ -352,7 +352,7 @@ export function MemoryJourney() {
         <div className="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3">
           {c.scrapbook.photos.map((photo, index) => (
             <figure key={photo.src} className={cn("photo-print mb-6 break-inside-avoid p-3 pb-7", index % 3 === 0 ? "rotate-[-1deg]" : index % 3 === 1 ? "rotate-[1.2deg]" : "rotate-[-0.5deg]")}>
-              <ImageWithFallback src={photo.src} alt={photo.alt} label={`Memory ${String(index + 1).padStart(2, "0")}`} className={cn("w-full object-cover", index % 2 ? "aspect-[4/5]" : "aspect-square")} />
+              <ImageWithFallback src={photo.src} alt={photo.alt} label={`Memory ${String(index + 1).padStart(2, "0")}`} className={cn("w-full bg-card", "fit" in photo && photo.fit === "whole" ? "h-auto object-contain" : index % 2 ? "aspect-[4/5] object-cover" : "aspect-square object-cover")} />
               <figcaption className="px-3 pt-5 text-center font-serif text-lg italic text-foreground/75">{photo.caption}</figcaption>
             </figure>
           ))}
