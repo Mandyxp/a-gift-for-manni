@@ -30,16 +30,50 @@ type ChapterProps = {
   id: string;
 };
 
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShown(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  return { ref, shown };
+}
+
+function Reveal({ children, className, delay = 0, as: Tag = "div" }: { children: React.ReactNode; className?: string; delay?: number; as?: "div" | "header" | "li" | "figure" }) {
+  const { ref, shown } = useReveal<HTMLDivElement>();
+  return (
+    <Tag ref={ref as never} className={cn("reveal", shown && "is-shown", className)} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </Tag>
+  );
+}
+
 function Chapter({ number, eyebrow, children, className, id }: ChapterProps) {
   return (
     <section id={id} className={cn("chapter relative scroll-mt-12 px-5 py-24 sm:px-8 sm:py-32", className)}>
       <div className="mx-auto w-full max-w-5xl">
-        <div className="mb-12 flex items-center gap-4 text-xs uppercase text-muted-foreground">
+        <Reveal className="mb-12 flex items-center gap-4 text-xs uppercase text-muted-foreground">
           <span className="font-medium">{number}</span>
-          <span className="h-px w-10 bg-border" />
+          <span className="petal-rule h-px w-10 bg-border" />
           <span>{eyebrow}</span>
-        </div>
-        {children}
+        </Reveal>
+        <Reveal delay={90}>{children}</Reveal>
       </div>
     </section>
   );
