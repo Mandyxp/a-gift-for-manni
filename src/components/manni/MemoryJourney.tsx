@@ -203,7 +203,7 @@ export function MemoryJourney() {
         <div className="paper-particles" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl animate-fade-in">
           <p className="mb-6 text-xs uppercase text-muted-foreground">{c.date.display}</p>
-          <h1 className="font-serif text-7xl leading-none text-primary sm:text-8xl md:text-9xl">{c.person}</h1>
+          <h1 className="title-float font-serif text-7xl leading-none text-primary sm:text-8xl md:text-9xl">{c.person}</h1>
           <div className="mx-auto my-9 h-px w-16 bg-accent-foreground/40" />
           <p className="mx-auto max-w-xl font-serif text-2xl leading-relaxed text-foreground/80 sm:text-3xl">{c.opening.line}</p>
           <Button size="lg" className="mt-12 min-w-36" onClick={() => { setEntered(true); setAudioOn(true); }}>
