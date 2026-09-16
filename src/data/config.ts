@@ -13,7 +13,6 @@ import photo07 from "@/assets/IMG_3102.jpg.asset.json";
 import photo08 from "@/assets/IMG_3531.jpg.asset.json";
 import trackA from "@/assets/track-1984aea3.mp3.asset.json";
 import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
-import trackC from "@/assets/track-76795895.mp3.asset.json";
 import trackD from "@/assets/track-e2853fb0.mp3.asset.json";
 
 export type GridCell = [row: number, column: number];
