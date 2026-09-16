@@ -327,9 +327,8 @@ export function MemoryJourney() {
           </div>
           {!boxOpen && (
             <div className="mt-9 flex flex-col items-center gap-3">
-              <Button variant="secondary" size="lg" disabled={!canUnlock} onClick={() => setBoxOpen(true)}><KeyRound /> {c.lockedBox.openLabel}</Button>
-              {!canUnlock && <p className="text-xs text-primary-foreground/60">Complete both keepsakes above—or continue without them.</p>}
-              <Button variant="ghost" className="text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground" onClick={() => setBoxOpen(true)}>{c.lockedBox.bypassLabel}</Button>
+              <Button variant="secondary" size="lg" disabled={!canUnlock} onClick={() => setBoxOpen(true)} className={cn(canUnlock && "key-ready")}><KeyRound /> {c.lockedBox.openLabel}</Button>
+              {!canUnlock && <p className="text-xs text-primary-foreground/60">Answer the memory quiz above to turn the key.</p>}
             </div>
           )}
         </div>
