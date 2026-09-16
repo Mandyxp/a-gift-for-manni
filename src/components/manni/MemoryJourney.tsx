@@ -318,7 +318,7 @@ export function MemoryJourney() {
                 const selected = selectedCells.some((cell) => cellKey(cell) === key);
                 const found = foundCellKeys.has(key);
                 return (
-                  <button key={key} type="button" aria-label={`Letter ${letter}, row ${rowIndex + 1}, column ${columnIndex + 1}`} aria-pressed={selected || found} onClick={() => toggleCell([rowIndex, columnIndex])} className={cn("aspect-square min-h-9 border border-transparent font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", selected && "bg-primary text-primary-foreground", found && "border-accent-foreground/30 bg-accent text-accent-foreground")}>
+                  <button key={key} type="button" aria-label={`Letter ${letter}, row ${rowIndex + 1}, column ${columnIndex + 1}`} aria-pressed={selected || found} onClick={() => toggleCell([rowIndex, columnIndex])} className={cn("aspect-square min-h-9 border border-transparent font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", "cell-tile", selected && "bg-primary text-primary-foreground", found && "cell-found border-accent-foreground/30 bg-accent text-accent-foreground")}>
                     {letter}
                   </button>
                 );
