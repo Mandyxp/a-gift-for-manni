@@ -89,7 +89,7 @@ export const manniConfig = {
         hint: "It begins every chapter here.",
       },
     ],
-    completion: "The first half of the key is yours.",
+    completion: "The key is yours.",
   },
   wordSearch: {
     title: "Words I kept returning to",
