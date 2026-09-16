@@ -143,9 +143,39 @@ button { cursor: pointer; }
 .letter-viewer { scrollbar-color: var(--color-accent) transparent; }
 .journey-progress { width: 100%; transform-origin: left; animation: progress linear; animation-timeline: scroll(root); }
 
+/* --- reveal on scroll --- */
+.reveal { opacity: 0; transform: translateY(26px) scale(.99); transition: opacity .8s ease, transform .9s cubic-bezier(.16,.84,.28,1); }
+.reveal.is-shown { opacity: 1; transform: none; }
+
+/* --- cute details --- */
+.title-float { animation: title-float 7s ease-in-out infinite; }
+.petal-rule { position: relative; }
+.petal-rule::after { position: absolute; right: -1.1rem; top: -.55rem; content: "❀"; font-size: .75rem; color: color-mix(in oklab, var(--color-accent-foreground) 75%, transparent); animation: pulse-soft 4.5s ease-in-out infinite; }
+.memory-envelope::before { position: absolute; left: 1.15rem; top: 1.15rem; content: "♡"; font-size: .8rem; color: color-mix(in oklab, var(--color-accent-foreground) 60%, transparent); transition: transform .3s ease; }
+.memory-envelope:hover::before { transform: scale(1.35) rotate(-8deg); }
+.memory-envelope { transition: transform .35s cubic-bezier(.2,.8,.25,1), box-shadow .35s ease; }
+.memory-envelope:hover { transform: translateY(-4px) rotate(-.4deg); box-shadow: 0 16px 40px color-mix(in oklab, var(--color-primary) 12%, transparent); }
+.photo-sway { transition: transform .45s cubic-bezier(.2,.8,.25,1), box-shadow .45s ease; }
+.photo-sway:hover { transform: rotate(0deg) translateY(-6px) scale(1.015); box-shadow: 6px 16px 34px color-mix(in oklab, var(--color-primary) 16%, transparent); }
+.wax-sealed::after { position: absolute; right: 1.25rem; top: -1rem; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; content: "❤"; border-radius: 50%; font-size: .95rem; color: var(--color-primary-foreground); background: color-mix(in oklab, var(--color-primary) 82%, var(--color-accent)); box-shadow: 0 6px 16px color-mix(in oklab, var(--color-primary) 28%, transparent); animation: seal-in .9s cubic-bezier(.2,1.4,.3,1) both; }
+.cell-tile { transition: transform .18s cubic-bezier(.2,1.5,.3,1), background-color .2s ease, color .2s ease; }
+.cell-tile:hover { transform: scale(1.12); }
+.cell-found { animation: cell-pop .5s cubic-bezier(.2,1.5,.3,1) both; }
+.key-ready { animation: key-ready 2.4s ease-in-out infinite; }
+.pressed-flower { animation: sway-soft 6s ease-in-out infinite; }
+.glow-point { animation: pulse-glow 4s ease-in-out infinite; }
+.keepsake-box::after { position: absolute; left: 50%; top: 0; bottom: 0; width: 1.6rem; content: ""; transform: translateX(-50%); background: color-mix(in oklab, var(--color-accent) 55%, transparent); opacity: .65; pointer-events: none; }
+.keepsake-box.is-open::after { opacity: 0; transition: opacity .6s ease; }
+
 @keyframes drift { from { transform: translateY(-10px); } to { transform: translateY(80px); } }
 @keyframes pulse-soft { 0%,100% { opacity: .4; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+@keyframes pulse-glow { 0%,100% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-accent) 14%, transparent), 0 0 22px var(--color-accent); } 50% { box-shadow: 0 0 0 11px color-mix(in oklab, var(--color-accent) 22%, transparent), 0 0 38px var(--color-accent); } }
 @keyframes progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes title-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes sway-soft { 0%,100% { transform: rotate(-5deg); } 50% { transform: rotate(6deg); } }
+@keyframes cell-pop { 0% { transform: scale(.7); } 60% { transform: scale(1.22); } 100% { transform: scale(1); } }
+@keyframes seal-in { from { opacity: 0; transform: scale(.3) rotate(-25deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes key-ready { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 14px color-mix(in oklab, var(--color-accent) 0%, transparent); } }
 
 @media (max-width: 640px) {
   .chapter { min-height: auto; }
@@ -155,4 +185,5 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }

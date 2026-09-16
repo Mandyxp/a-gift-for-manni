@@ -13,7 +13,6 @@ import photo07 from "@/assets/IMG_3102.jpg.asset.json";
 import photo08 from "@/assets/IMG_3531.jpg.asset.json";
 import trackA from "@/assets/track-1984aea3.mp3.asset.json";
 import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
-import trackC from "@/assets/track-76795895.mp3.asset.json";
 import trackD from "@/assets/track-e2853fb0.mp3.asset.json";
 
 export type GridCell = [row: number, column: number];
@@ -77,7 +76,7 @@ export const manniConfig = {
       {
         prompt: "What did we always call our safest place?",
         answers: ["home", "our home"],
-        hint: "One word, more feeling than place.",
+        hint: "“My heart feels like ____ with you.”",
       },
       {
         prompt: "Which month holds our date?",
@@ -90,7 +89,7 @@ export const manniConfig = {
         hint: "It begins every chapter here.",
       },
     ],
-    completion: "The first half of the key is yours.",
+    completion: "The key is yours.",
   },
   wordSearch: {
     title: "Words I kept returning to",
@@ -129,7 +128,7 @@ export const manniConfig = {
   lockedBox: {
     title: "The 06 · 12 folder",
     lockedText: "Two small pieces, one quiet lock.",
-    bypassLabel: "Open without the key",
+    
     openLabel: "Turn the key",
     openedText: "Some things are kept safe until we are ready to hold them.",
   },
@@ -207,7 +206,7 @@ export const manniConfig = {
   },
   audio: {
     /** Hidden playlist — order is shuffled at runtime and titles are never shown. */
-    tracks: [trackA.url, trackB.url, trackC.url, trackD.url],
+    tracks: [trackA.url, trackB.url, trackD.url],
     available: true,
     label: "Background music",
     shuffleLabel: "Play something else",

@@ -30,16 +30,50 @@ type ChapterProps = {
   id: string;
 };
 
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShown(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+  return { ref, shown };
+}
+
+function Reveal({ children, className, delay = 0, as: Tag = "div" }: { children: React.ReactNode; className?: string; delay?: number; as?: "div" | "header" | "li" | "figure" }) {
+  const { ref, shown } = useReveal<HTMLDivElement>();
+  return (
+    <Tag ref={ref as never} className={cn("reveal", shown && "is-shown", className)} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </Tag>
+  );
+}
+
 function Chapter({ number, eyebrow, children, className, id }: ChapterProps) {
   return (
     <section id={id} className={cn("chapter relative scroll-mt-12 px-5 py-24 sm:px-8 sm:py-32", className)}>
       <div className="mx-auto w-full max-w-5xl">
-        <div className="mb-12 flex items-center gap-4 text-xs uppercase text-muted-foreground">
+        <Reveal className="mb-12 flex items-center gap-4 text-xs uppercase text-muted-foreground">
           <span className="font-medium">{number}</span>
-          <span className="h-px w-10 bg-border" />
+          <span className="petal-rule h-px w-10 bg-border" />
           <span>{eyebrow}</span>
-        </div>
-        {children}
+        </Reveal>
+        <Reveal delay={90}>{children}</Reveal>
       </div>
     </section>
   );
@@ -83,7 +117,7 @@ export function MemoryJourney() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const pinchDistanceRef = useRef<number | null>(null);
 
-  const canUnlock = quizComplete && puzzleComplete;
+  const canUnlock = quizComplete;
   const currentQuestion = c.quiz.questions[quizIndex];
 
   useEffect(() => {
@@ -169,7 +203,7 @@ export function MemoryJourney() {
         <div className="paper-particles" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl animate-fade-in">
           <p className="mb-6 text-xs uppercase text-muted-foreground">{c.date.display}</p>
-          <h1 className="font-serif text-7xl leading-none text-primary sm:text-8xl md:text-9xl">{c.person}</h1>
+          <h1 className="title-float font-serif text-7xl leading-none text-primary sm:text-8xl md:text-9xl">{c.person}</h1>
           <div className="mx-auto my-9 h-px w-16 bg-accent-foreground/40" />
           <p className="mx-auto max-w-xl font-serif text-2xl leading-relaxed text-foreground/80 sm:text-3xl">{c.opening.line}</p>
           <Button size="lg" className="mt-12 min-w-36" onClick={() => { setEntered(true); setAudioOn(true); }}>
@@ -284,7 +318,7 @@ export function MemoryJourney() {
                 const selected = selectedCells.some((cell) => cellKey(cell) === key);
                 const found = foundCellKeys.has(key);
                 return (
-                  <button key={key} type="button" aria-label={`Letter ${letter}, row ${rowIndex + 1}, column ${columnIndex + 1}`} aria-pressed={selected || found} onClick={() => toggleCell([rowIndex, columnIndex])} className={cn("aspect-square min-h-9 border border-transparent font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", selected && "bg-primary text-primary-foreground", found && "border-accent-foreground/30 bg-accent text-accent-foreground")}>
+                  <button key={key} type="button" aria-label={`Letter ${letter}, row ${rowIndex + 1}, column ${columnIndex + 1}`} aria-pressed={selected || found} onClick={() => toggleCell([rowIndex, columnIndex])} className={cn("aspect-square min-h-9 border border-transparent font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", "cell-tile", selected && "bg-primary text-primary-foreground", found && "cell-found border-accent-foreground/30 bg-accent text-accent-foreground")}>
                     {letter}
                   </button>
                 );
@@ -327,9 +361,8 @@ export function MemoryJourney() {
           </div>
           {!boxOpen && (
             <div className="mt-9 flex flex-col items-center gap-3">
-              <Button variant="secondary" size="lg" disabled={!canUnlock} onClick={() => setBoxOpen(true)}><KeyRound /> {c.lockedBox.openLabel}</Button>
-              {!canUnlock && <p className="text-xs text-primary-foreground/60">Complete both keepsakes above—or continue without them.</p>}
-              <Button variant="ghost" className="text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground" onClick={() => setBoxOpen(true)}>{c.lockedBox.bypassLabel}</Button>
+              <Button variant="secondary" size="lg" disabled={!canUnlock} onClick={() => setBoxOpen(true)} className={cn(canUnlock && "key-ready")}><KeyRound /> {c.lockedBox.openLabel}</Button>
+              {!canUnlock && <p className="text-xs text-primary-foreground/60">Answer the memory quiz above to turn the key.</p>}
             </div>
           )}
         </div>
@@ -340,7 +373,7 @@ export function MemoryJourney() {
           <h2 className="font-serif text-5xl leading-tight">Letters I meant to write properly</h2>
           <p className="mt-5 leading-7 text-muted-foreground">Open only what you want. Leave the rest folded.</p>
         </header>
-        <div className="folder mt-14 p-5 pt-12 sm:p-10 sm:pt-14">
+        <div className="folder wax-sealed mt-14 p-5 pt-12 sm:p-10 sm:pt-14">
           <div className="folder-tab">Private · Manni</div>
           <div className="grid gap-5 md:grid-cols-3">
             {c.letters.map((letter, index) => (
@@ -371,7 +404,7 @@ export function MemoryJourney() {
         </header>
         <div className="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3">
           {c.scrapbook.photos.map((photo, index) => (
-            <figure key={photo.src} className={cn("photo-print mb-6 break-inside-avoid p-3 pb-7", index % 3 === 0 ? "rotate-[-1deg]" : index % 3 === 1 ? "rotate-[1.2deg]" : "rotate-[-0.5deg]")}>
+            <figure key={photo.src} className={cn("photo-print photo-sway mb-6 break-inside-avoid p-3 pb-7", index % 3 === 0 ? "rotate-[-1deg]" : index % 3 === 1 ? "rotate-[1.2deg]" : "rotate-[-0.5deg]")}>
               <ImageWithFallback src={photo.src} alt={photo.alt} label={`Memory ${String(index + 1).padStart(2, "0")}`} className={cn("w-full bg-card", "fit" in photo && photo.fit === "whole" ? "h-auto object-contain" : index % 2 ? "aspect-[4/5] object-cover" : "aspect-square object-cover")} />
               <figcaption className="px-3 pt-5 text-center font-serif text-lg italic text-foreground/75">{photo.caption}</figcaption>
             </figure>
