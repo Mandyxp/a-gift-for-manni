@@ -128,7 +128,7 @@ export const manniConfig = {
   lockedBox: {
     title: "The 06 · 12 folder",
     lockedText: "Two small pieces, one quiet lock.",
-    bypassLabel: "Open without the key",
+    
     openLabel: "Turn the key",
     openedText: "Some things are kept safe until we are ready to hold them.",
   },
