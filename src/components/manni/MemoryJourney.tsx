@@ -83,7 +83,7 @@ export function MemoryJourney() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const pinchDistanceRef = useRef<number | null>(null);
 
-  const canUnlock = quizComplete && puzzleComplete;
+  const canUnlock = quizComplete;
   const currentQuestion = c.quiz.questions[quizIndex];
 
   useEffect(() => {
