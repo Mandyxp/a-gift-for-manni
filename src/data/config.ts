@@ -76,7 +76,7 @@ export const manniConfig = {
       {
         prompt: "What did we always call our safest place?",
         answers: ["home", "our home"],
-        hint: "One word, more feeling than place.",
+        hint: "“My heart feels like ____ with you.”",
       },
       {
         prompt: "Which month holds our date?",
