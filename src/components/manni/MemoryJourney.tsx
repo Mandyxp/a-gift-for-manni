@@ -373,7 +373,7 @@ export function MemoryJourney() {
           <h2 className="font-serif text-5xl leading-tight">Letters I meant to write properly</h2>
           <p className="mt-5 leading-7 text-muted-foreground">Open only what you want. Leave the rest folded.</p>
         </header>
-        <div className="folder mt-14 p-5 pt-12 sm:p-10 sm:pt-14">
+        <div className="folder wax-sealed mt-14 p-5 pt-12 sm:p-10 sm:pt-14">
           <div className="folder-tab">Private · Manni</div>
           <div className="grid gap-5 md:grid-cols-3">
             {c.letters.map((letter, index) => (
