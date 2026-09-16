@@ -206,7 +206,7 @@ export const manniConfig = {
   },
   audio: {
     /** Hidden playlist — order is shuffled at runtime and titles are never shown. */
-    tracks: [trackA.url, trackB.url, trackC.url, trackD.url],
+    tracks: [trackA.url, trackB.url, trackD.url],
     available: true,
     label: "Background music",
     shuffleLabel: "Play something else",
