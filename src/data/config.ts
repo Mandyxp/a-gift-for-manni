@@ -240,6 +240,123 @@ export const manniConfig = {
     snapchat: { label: "Snapchat", handle: "manraj.xp", url: "https://snapchat.com/add/manraj.xp" },
     instagram: { label: "Instagram", handle: "manraj.xp", url: "https://instagram.com/manraj.xp" },
   },
+  /**
+   * The long personal message, told as scenes.
+   * Each entry is one scene: rewrite `text` freely, or change `visualType` to restyle it.
+   */
+  personalMessage: {
+    eyebrow: "Something personal",
+    title: "There’s something I want to tell you personally.",
+    intro: "Some things are easier to say when you finally have enough space to say them properly.",
+    openLabel: "There’s more…",
+    closeLabel: "Fold this away",
+    photo: "/assets/photos/personal-message.jpg",
+    photoLabel: "A photo I kept",
+    sections: [
+      {
+        id: "heard",
+        title: "Something I wanted you to hear",
+        visualType: "intro",
+        handwrittenNote: "I didn’t really know how to say this.",
+        lines: [
+          "There’s something I want to tell you personally.",
+          "I don’t know if these are words you’ll want to hear, or if they’ll change anything, but I hope you’ll at least understand where they’re coming from.",
+        ],
+      },
+      {
+        id: "comfortable",
+        title: "If you’re comfortable",
+        visualType: "envelope",
+        openLabel: "Open the note",
+        handwrittenNote: "Only if it feels right to you.",
+        lines: [
+          "If you’re comfortable with it, I’d like to have some way of sending you the things I still want to say sometimes—maybe your email, or whatever way feels comfortable for you.",
+          "Not because I expect you to reply every time, and not because I want to disturb your life. I just have a lot of things that I never managed to put into words properly.",
+        ],
+      },
+      {
+        id: "still-do",
+        title: "I still do.",
+        visualType: "minimal",
+        headline: "I love you. I still do.",
+        handwrittenNote: "And I’m not ashamed of that.",
+        lines: [],
+      },
+      {
+        id: "every-version",
+        title: "Every version of you",
+        visualType: "scrapbook",
+        scraps: ["the happy phases", "the difficult ones", "the changes", "the easy days", "the difficult days"],
+        lines: [
+          "I loved you through every version of you I got to know—the happy phases, the difficult ones, the changes, the moments when things were easy and the moments when they weren’t. And even after everything that happened, that feeling didn’t simply disappear because things became complicated.",
+          "But I also understand something now: loving someone doesn’t mean they have to love you back. It doesn’t mean they have to choose you, come back to you, or give you another chance.",
+        ],
+      },
+      {
+        id: "dont-have-to",
+        title: "You don’t have to",
+        visualType: "quiet",
+        steps: [
+          "You don’t have to love me.",
+          "You don’t even have to forgive me.",
+          "But if there is even a small part of you that could let me exist in your life again, I would like to be your friend.",
+        ],
+        lines: [
+          "Not someone trying to force the past back into the present. Just me—someone who genuinely cares about you and wants to be someone you can talk to without feeling pressured.",
+        ],
+      },
+      {
+        id: "understand-now",
+        title: "What I understand now",
+        visualType: "reflection",
+        margins: ["listen more", "trust more", "react less", "respect more"],
+        lines: [
+          "I used to think that if two people really cared about each other, they just had to keep fighting for it. Now I understand that sometimes caring also means knowing when to stop pulling and simply respect the other person’s choice.",
+          "I want to learn how to love someone without making my fears their burden. I want to learn how to communicate without turning everything into an argument. I want to be able to care about you without trying to control what you feel.",
+        ],
+      },
+      {
+        id: "wont-ask",
+        title: "I won’t ask you to choose me",
+        visualType: "quiet",
+        steps: [
+          "So I won’t ask you to choose me.",
+          "I won’t ask you to forget what happened.",
+          "I won’t ask you to pretend that nothing changed.",
+        ],
+        lines: [
+          "I only want the chance to show you, through my actions and not just my words, that I can become better than the version of me you remember from the worst moments.",
+          "And if one day you decide that you don’t want me in your life at all, I’ll have to accept that too. But I couldn’t leave these words unsaid.",
+        ],
+      },
+      {
+        id: "what-you-became",
+        title: "What you became to me",
+        visualType: "photo",
+        image: "/assets/photos/personal-message.jpg",
+        scraps: ["never just a chapter", "someone I loved", "someone I cared about deeply", "a part of my life"],
+        lines: [
+          "You were never just a chapter I wanted to erase because it ended differently than I hoped.",
+          "You were someone I loved. Someone I cared about deeply. Someone whose presence became a part of my life in a way I don’t think I can pretend never happened.",
+          "And maybe that’s why, even now, a part of me still wishes that someday we could sit somewhere, talk normally, laugh about stupid things again, and realise that not everything beautiful between two people has to disappear just because the relationship changed.",
+        ],
+      },
+      {
+        id: "final",
+        title: "The last page",
+        visualType: "final",
+        steps: [
+          "I don’t know what the future looks like.",
+          "I just know that if there is ever a place for me in it—even as a friend—I would be grateful for it.",
+        ],
+        punjabi: ["Tu meri jaan aa.", "Te sach dassan…", "Mai ajj vi chaunda haan ke ik hor New Year tere naal dekhaan."],
+        lines: [
+          "Not because you owe me that moment. Just because, if life ever gives us that chance again, I’d like to be there.",
+        ],
+      },
+    ],
+  },
+
   audio: {
     /** Hidden playlist — order is shuffled at runtime and titles are never shown. */
     tracks: [trackA.url, trackB.url, trackD.url],
