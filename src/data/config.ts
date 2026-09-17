@@ -182,6 +182,42 @@ export const manniConfig = {
     to: { label: "USA", coordinates: "37.0902° N, 95.7129° W" },
     note: "The distance is real. So is the care that crosses it—quietly, without asking to be measured.",
   },
+  /** The illustrated map. `x`/`y` are percentages on the map canvas, so places can be nudged freely. */
+  distanceMap: {
+    title: "Somewhere Between Here and There",
+    subtitle: "Different places. Different skies. A lot of memories in between.",
+    hint: "Drag to move · pinch or scroll to zoom · tap the plane, the places, and the little stars",
+    origin: {
+      label: "India",
+      coordinates: "20.5937° N, 78.9629° E",
+      x: 69,
+      y: 55,
+      note: "Where a lot of this story happened.",
+    },
+    destination: {
+      label: "USA",
+      coordinates: "37.0902° N, 95.7129° W",
+      x: 19,
+      y: 44,
+      note: "Somewhere far away, where life is continuing in a completely different place.",
+    },
+    plane: {
+      /** Seconds for one full crossing. Higher is slower. */
+      speed: 34,
+      messages: ["Still a long way.", "But distance doesn’t erase memories."],
+    },
+    /** `at` is a position along the route, from 0 (India) to 1 (USA). */
+    stars: [
+      { at: 0.16, text: "Some memories travel surprisingly far." },
+      { at: 0.34, text: "Different time zone." },
+      { at: 0.52, text: "Same old memories." },
+      { at: 0.7, text: "Some things don’t need a map." },
+      { at: 0.86, text: "A different sky, still the same stars." },
+    ],
+    closing: "I guess the weird thing about distance is that it changes where someone is, not everything they meant.",
+    footnote: "India → USA",
+  },
+
   easterEgg: {
     ariaLabel: "A small pressed flower",
     message: "If you found this: I still remember the smallest things.",
