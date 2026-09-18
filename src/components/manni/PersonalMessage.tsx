@@ -196,15 +196,13 @@ function ReflectionScene({ section }: { section: PersonalMessageSection }) {
             </Rise>
           ))}
         </div>
-        <ul className="flex flex-wrap gap-4 md:flex-col md:border-l md:border-dashed md:border-border md:pl-5">
+        <div className="flex flex-wrap gap-4 md:flex-col md:border-l md:border-dashed md:border-border md:pl-5">
           {section.margins?.map((margin, index) => (
             <Rise key={margin} delay={300 + index * 140}>
-              <li className="list-none">
-                <Handwritten className={cn("text-lg", index % 2 ? "rotate-1" : "-rotate-1")}>{margin}</Handwritten>
-              </li>
+              <Handwritten className={cn("text-lg", index % 2 ? "rotate-1" : "-rotate-1")}>{margin}</Handwritten>
             </Rise>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
