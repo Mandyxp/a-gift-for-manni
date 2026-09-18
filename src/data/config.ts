@@ -9,7 +9,7 @@ import photo03 from "@/assets/IMG_3462.jpg.asset.json";
 import photo04 from "@/assets/IMG_3463.jpg.asset.json";
 import photo05 from "@/assets/IMG_3461.jpg.asset.json";
 import photo06 from "@/assets/IMG_3465.jpg.asset.json";
-import photo07 from "@/assets/IMG_3102.jpg.asset.json";
+import photo07 from "@/assets/IMG_3603.jpeg.asset.json";
 import photo08 from "@/assets/IMG_3531.jpg.asset.json";
 import trackA from "@/assets/track-1984aea3.mp3.asset.json";
 import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
@@ -172,7 +172,7 @@ export const manniConfig = {
       { src: photo04.url, alt: "A saved message: I'd never leave you, never forget you", caption: "Never forgotten. Not for a single day", fit: "whole" },
       { src: photo05.url, alt: "A saved message: you're always on my mind", caption: "Still, and quietly, on my mind", fit: "whole" },
       { src: photo06.url, alt: "A saved message about two hurt people falling in love", caption: "Some things happen for a reason we only see later", fit: "whole" },
-      { src: photo07.url, alt: "A hand resting on a page of study notes", caption: "The ordinary hours that mattered more than I said", fit: "whole" },
+      { src: photo07.url, alt: "The moon and Venus close together in a dusk sky", caption: "If moon and Venus can meet, then why not us", fit: "whole" },
       { src: photo08.url, alt: "A soft animated frame that reminds me of you", caption: "This one always made me think of you" },
     ],
   },

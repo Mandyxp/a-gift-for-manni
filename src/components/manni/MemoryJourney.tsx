@@ -21,6 +21,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { manniConfig, type GridCell } from "@/data/config";
+import { DistanceMap } from "@/components/manni/DistanceMap";
+import { PersonalMessage } from "@/components/manni/PersonalMessage";
 
 type ChapterProps = {
   number: string;
@@ -122,6 +124,7 @@ export function MemoryJourney() {
 
   useEffect(() => {
     if (!audioRef.current) return;
+    audioRef.current.volume = 0.32;
     if (audioOn) void audioRef.current.play().catch(() => setAudioOn(false));
     else audioRef.current.pause();
   }, [audioOn, trackIndex, consented, exited]);
@@ -412,19 +415,15 @@ export function MemoryJourney() {
         </div>
       </Chapter>
 
-      <Chapter id="distance" number="08" eyebrow="Across the distance" className="night-section text-primary-foreground">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="font-serif text-5xl sm:text-6xl">{c.distance.title}</h2>
-          <div className="distance-map relative mx-auto mt-16 h-64 max-w-3xl" aria-label={`A line from ${c.distance.from.label} to ${c.distance.to.label}`}>
-            <div className="flight-arc absolute left-[15%] right-[15%] top-12 h-36 rounded-[50%] border-t border-dashed border-primary-foreground/50" />
-            <div className="absolute bottom-10 left-[4%] text-left sm:left-[10%]"><span className="glow-point block" /><p className="mt-4 font-serif text-2xl">{c.distance.from.label}</p><p className="mt-1 text-xs text-primary-foreground/50">{c.distance.from.coordinates}</p></div>
-            <div className="absolute bottom-10 right-[4%] text-right sm:right-[10%]"><span className="glow-point ml-auto block" /><p className="mt-4 font-serif text-2xl">{c.distance.to.label}</p><p className="mt-1 text-xs text-primary-foreground/50">{c.distance.to.coordinates}</p></div>
-          </div>
-          <p className="mx-auto mt-8 max-w-xl font-serif text-2xl leading-relaxed text-primary-foreground/80">{c.distance.note}</p>
-        </div>
+      <Chapter id="distance" number="08" eyebrow="Somewhere between here and there" className="night-section text-primary-foreground">
+        <DistanceMap />
       </Chapter>
 
-      <Chapter id="easter-egg" number="09" eyebrow="A detail in the margin">
+      <Chapter id="personal-message" number="09" eyebrow={manniConfig.personalMessage.eyebrow} className="bg-secondary/40">
+        <PersonalMessage />
+      </Chapter>
+
+      <Chapter id="easter-egg" number="10" eyebrow="A detail in the margin">
         <div className="mx-auto max-w-xl text-center">
           <p className="font-serif text-3xl leading-relaxed text-foreground/75">Some memories announce themselves. Others wait quietly in the margins.</p>
           <button type="button" onClick={() => setEggOpen((value) => !value)} aria-label={c.easterEgg.ariaLabel} className="pressed-flower mx-auto mt-14 block p-4 text-accent-foreground transition-transform hover:rotate-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Flower2 className="h-12 w-12" strokeWidth={1} /></button>
@@ -432,7 +431,7 @@ export function MemoryJourney() {
         </div>
       </Chapter>
 
-      <Chapter id="final-letter" number="10" eyebrow="One final letter" className="pb-32 pt-28">
+      <Chapter id="final-letter" number="11" eyebrow="One final letter" className="pb-32 pt-28">
         <div className={cn("book mx-auto max-w-3xl", bookClosed && "book-closed")}>
           <article className="letter-sheet book-page px-7 py-12 sm:px-16 sm:py-20">
             <h2 className="font-serif text-5xl">{c.finalLetter.title}</h2>
@@ -455,7 +454,7 @@ export function MemoryJourney() {
         </div>
       </Chapter>
 
-      <Chapter id="contact" number="11" eyebrow={c.contact.eyebrow} className="bg-secondary/55 pb-28">
+      <Chapter id="contact" number="12" eyebrow={c.contact.eyebrow} className="bg-secondary/55 pb-28">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-5xl leading-tight sm:text-6xl">{c.contact.title}</h2>
           <p className="mx-auto mt-6 max-w-xl leading-8 text-muted-foreground">{c.contact.note}</p>

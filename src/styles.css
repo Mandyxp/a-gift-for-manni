@@ -167,6 +167,69 @@ button { cursor: pointer; }
 .keepsake-box::after { position: absolute; left: 50%; top: 0; bottom: 0; width: 1.6rem; content: ""; transform: translateX(-50%); background: color-mix(in oklab, var(--color-accent) 55%, transparent); opacity: .65; pointer-events: none; }
 .keepsake-box.is-open::after { opacity: 0; transition: opacity .6s ease; }
 
+/* --- illustrated distance map --- */
+.map-frame {
+  border: 1px solid color-mix(in oklab, var(--color-primary-foreground) 18%, transparent);
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    radial-gradient(ellipse at 50% 120%, color-mix(in oklab, var(--color-accent) 22%, transparent), transparent 70%),
+    radial-gradient(circle at 20% 22%, color-mix(in oklab, var(--color-primary-foreground) 55%, transparent) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 12%, color-mix(in oklab, var(--color-accent) 55%, transparent) 0 1px, transparent 1.6px),
+    linear-gradient(170deg, color-mix(in oklab, var(--color-primary) 92%, black), color-mix(in oklab, var(--color-primary) 78%, var(--color-accent-foreground)));
+  background-size: auto, 121px 103px, 167px 139px, auto;
+  box-shadow: inset 0 0 60px color-mix(in oklab, black 22%, transparent);
+  cursor: grab;
+}
+.map-frame:active { cursor: grabbing; }
+.route-line { stroke-dasharray: 1400; stroke-dashoffset: 1400; transition: stroke-dashoffset 3.4s ease-out; }
+.route-line.is-drawn { stroke-dashoffset: 0; }
+.map-star span { box-shadow: 0 0 8px var(--color-accent); animation: twinkle 3.6s ease-in-out infinite; }
+.map-note {
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) + 2px);
+  background-color: var(--color-card);
+  background-image: repeating-linear-gradient(0deg, transparent 0 25px, color-mix(in oklab, var(--color-accent-foreground) 6%, transparent) 26px);
+  box-shadow: 0 14px 34px color-mix(in oklab, black 28%, transparent);
+  animation: note-in .45s cubic-bezier(.2,.9,.25,1) both;
+  transform: rotate(-.5deg);
+}
+.note-spark { animation: pulse-soft 2.6s ease-in-out infinite; display: inline-block; }
+
+/* --- personal message scenes --- */
+.handwritten { font-family: "Caveat", "Libre Caslon Display", cursive; letter-spacing: .01em; }
+.scene { position: relative; overflow: hidden; border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent); border-radius: calc(var(--radius) + 4px); }
+.scene-cream { background-color: var(--color-card); background-image: repeating-linear-gradient(94deg, transparent 0 9px, color-mix(in oklab, var(--color-foreground) 2%, transparent) 10px 11px); }
+.scene-ivory { background: color-mix(in oklab, var(--color-background) 85%, white); }
+.scene-rose { background: color-mix(in oklab, var(--color-secondary) 78%, var(--color-card)); }
+.scene-torn {
+  background-color: color-mix(in oklab, var(--color-card) 92%, var(--color-accent));
+  background-image: repeating-linear-gradient(0deg, transparent 0 29px, color-mix(in oklab, var(--color-accent-foreground) 5%, transparent) 30px);
+  clip-path: polygon(0 1.2%, 6% 0, 20% 1.4%, 44% 0, 68% 1.5%, 88% 0, 100% 1.3%, 100% 98.6%, 82% 100%, 58% 98.7%, 32% 100%, 10% 98.8%, 0 100%);
+}
+.scene-final { background: linear-gradient(180deg, color-mix(in oklab, var(--color-secondary) 55%, var(--color-card)), color-mix(in oklab, var(--color-background) 92%, white)); }
+.paper-scrap {
+  border: 1px solid color-mix(in oklab, var(--color-border) 80%, transparent);
+  background: color-mix(in oklab, var(--color-card) 88%, var(--color-accent));
+  box-shadow: 2px 4px 10px color-mix(in oklab, var(--color-primary) 10%, transparent);
+  transition: transform .35s cubic-bezier(.2,.8,.25,1);
+}
+.paper-scrap:hover { transform: translateY(-3px) rotate(0deg); }
+.folded-note {
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--color-card) 96%, var(--color-accent)), var(--color-card));
+  box-shadow: 0 10px 26px color-mix(in oklab, var(--color-primary) 10%, transparent);
+  transition: transform .45s cubic-bezier(.2,.8,.25,1), box-shadow .45s ease;
+}
+.folded-note::after { position: absolute; }
+.folded-note:hover { transform: translateY(-3px); }
+.folded-note.is-open { transform: rotate(-.6deg) scale(.985); box-shadow: 0 4px 14px color-mix(in oklab, var(--color-primary) 8%, transparent); }
+.punjabi-line { position: relative; display: inline-block; color: var(--color-primary); }
+.punjabi-line::after { position: absolute; left: 12%; right: 12%; bottom: -.7rem; height: 1px; content: ""; background: color-mix(in oklab, var(--color-accent-foreground) 55%, transparent); }
+
+@keyframes twinkle { 0%,100% { opacity: .4; transform: rotate(45deg) scale(.8); } 50% { opacity: 1; transform: rotate(45deg) scale(1.25); } }
+@keyframes note-in { from { opacity: 0; transform: translateY(10px) rotate(-.5deg); } to { opacity: 1; transform: translateY(0) rotate(-.5deg); } }
+
+
 @keyframes drift { from { transform: translateY(-10px); } to { transform: translateY(80px); } }
 @keyframes pulse-soft { 0%,100% { opacity: .4; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
 @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-accent) 14%, transparent), 0 0 22px var(--color-accent); } 50% { box-shadow: 0 0 0 11px color-mix(in oklab, var(--color-accent) 22%, transparent), 0 0 38px var(--color-accent); } }
