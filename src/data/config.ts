@@ -9,7 +9,7 @@ import photo03 from "@/assets/IMG_3462.jpg.asset.json";
 import photo04 from "@/assets/IMG_3463.jpg.asset.json";
 import photo05 from "@/assets/IMG_3461.jpg.asset.json";
 import photo06 from "@/assets/IMG_3465.jpg.asset.json";
-import photo07 from "@/assets/IMG_3102.jpg.asset.json";
+import photo07 from "@/assets/IMG_3603.jpeg.asset.json";
 import photo08 from "@/assets/IMG_3531.jpg.asset.json";
 import trackA from "@/assets/track-1984aea3.mp3.asset.json";
 import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
