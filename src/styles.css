@@ -165,6 +165,7 @@ button { cursor: pointer; }
 .pressed-flower { animation: sway-soft 6s ease-in-out infinite; }
 .glow-point { animation: pulse-glow 4s ease-in-out infinite; }
 .keepsake-box::after { position: absolute; left: 50%; top: 0; bottom: 0; width: 1.6rem; content: ""; transform: translateX(-50%); background: color-mix(in oklab, var(--color-accent) 55%, transparent); opacity: .65; pointer-events: none; }
+.keepsake-box.is-open::after { opacity: 0; transition: opacity .6s ease; }
 
 /* --- illustrated distance map --- */
 .map-frame {
