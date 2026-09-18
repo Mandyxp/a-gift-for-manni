@@ -43,7 +43,7 @@ function useSceneReveal<T extends HTMLElement>() {
   return { ref, shown };
 }
 
-function Rise({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+function Rise({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string | undefined }) {
   const { ref, shown } = useSceneReveal<HTMLDivElement>();
   return (
     <div ref={ref} className={cn("reveal", shown && "is-shown", className)} style={{ transitionDelay: `${delay}ms` }}>
@@ -52,7 +52,7 @@ function Rise({ children, delay = 0, className }: { children: React.ReactNode; d
   );
 }
 
-function PhotoFrame({ src, label, className }: { src?: string; label: string; className?: string }) {
+function PhotoFrame({ src, label, className }: { src?: string | undefined; label: string; className?: string | undefined }) {
   const [failed, setFailed] = useState(!src);
   return (
     <figure className={cn("photo-print photo-sway p-3 pb-6", className)}>
@@ -72,7 +72,7 @@ function PhotoFrame({ src, label, className }: { src?: string; label: string; cl
   );
 }
 
-function Handwritten({ children, className }: { children: React.ReactNode; className?: string }) {
+function Handwritten({ children, className }: { children: React.ReactNode; className?: string | undefined }) {
   return <p className={cn("handwritten text-accent-foreground", className)}>{children}</p>;
 }
 
@@ -198,7 +198,7 @@ function ReflectionScene({ section }: { section: PersonalMessageSection }) {
         </div>
         <ul className="flex flex-wrap gap-4 md:flex-col md:border-l md:border-dashed md:border-border md:pl-5">
           {section.margins?.map((margin, index) => (
-            <Rise as-child key={margin} delay={300 + index * 140}>
+            <Rise key={margin} delay={300 + index * 140}>
               <li className="list-none">
                 <Handwritten className={cn("text-lg", index % 2 ? "rotate-1" : "-rotate-1")}>{margin}</Handwritten>
               </li>
@@ -210,7 +210,7 @@ function ReflectionScene({ section }: { section: PersonalMessageSection }) {
   );
 }
 
-function PhotoScene({ section, fallbackImage, photoLabel }: { section: PersonalMessageSection; fallbackImage?: string; photoLabel: string }) {
+function PhotoScene({ section, fallbackImage, photoLabel }: { section: PersonalMessageSection; fallbackImage?: string | undefined; photoLabel: string }) {
   return (
     <div className="scene scene-cream px-6 py-16 sm:px-14 sm:py-24">
       <div className="mx-auto grid max-w-4xl gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-center">
@@ -262,7 +262,7 @@ function FinalMessageScene({ section }: { section: PersonalMessageSection }) {
   );
 }
 
-function MessageScene({ section, fallbackImage, photoLabel }: { section: PersonalMessageSection; fallbackImage?: string; photoLabel: string }) {
+function MessageScene({ section, fallbackImage, photoLabel }: { section: PersonalMessageSection; fallbackImage?: string | undefined; photoLabel: string }) {
   switch (section.visualType) {
     case "envelope":
       return <EnvelopeScene section={section} />;
