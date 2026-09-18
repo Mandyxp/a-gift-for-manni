@@ -241,7 +241,7 @@ export function DistanceMap() {
                     discover(star.text);
                   }}
                 >
-                  <span className="block h-1.5 w-1.5 rotate-45 bg-primary-foreground" />
+                  <span className="block h-1.5 w-1.5 bg-primary-foreground" />
                 </button>
               );
             })}
