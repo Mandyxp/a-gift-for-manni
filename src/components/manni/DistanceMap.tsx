@@ -199,7 +199,7 @@ export function DistanceMap() {
             className="absolute inset-0 origin-top-left"
             style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})` }}
           >
-            <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} className="h-full w-full" role="img" aria-label={`A small map from ${c.origin.label} to ${c.destination.label}`}>
+            <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} preserveAspectRatio="none" className="h-full w-full" role="img" aria-label={`A small map from ${c.origin.label} to ${c.destination.label}`}>
               <defs>
                 <linearGradient id="map-land" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.34" />
