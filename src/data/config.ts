@@ -3,17 +3,17 @@
  * Replace the sample copy and /assets paths below without changing any UI code.
  * Keep the word-search grid rectangular and coordinates zero-based.
  */
-import photo01 from "@/assets/IMG_3460.jpg.asset.json";
-import photo02 from "@/assets/IMG_3464.jpg.asset.json";
-import photo03 from "@/assets/IMG_3462.jpg.asset.json";
-import photo04 from "@/assets/IMG_3463.jpg.asset.json";
-import photo05 from "@/assets/IMG_3461.jpg.asset.json";
-import photo06 from "@/assets/IMG_3465.jpg.asset.json";
-import photo07 from "@/assets/IMG_3603.jpeg.asset.json";
-import photo08 from "@/assets/IMG_3531.jpg.asset.json";
-import trackA from "@/assets/track-1984aea3.mp3.asset.json";
-import trackB from "@/assets/track-3a7af93a.mp3.asset.json";
-import trackD from "@/assets/track-e2853fb0.mp3.asset.json";
+import photo01 from "@/assets/IMG_3460.jpg";
+import photo02 from "@/assets/IMG_3464.jpg";
+import photo03 from "@/assets/IMG_3462.jpg";
+import photo04 from "@/assets/IMG_3463.jpg";
+import photo05 from "@/assets/IMG_3461.jpg";
+import photo06 from "@/assets/IMG_3465.jpg";
+import photo07 from "@/assets/IMG_3603.jpeg";
+import photo08 from "@/assets/IMG_3531.jpg";
+import trackA from "@/assets/track-1984aea3.mp3";
+import trackB from "@/assets/track-3a7af93a.mp3";
+import trackD from "@/assets/track-e2853fb0.mp3";
 
 export type GridCell = [row: number, column: number];
 
@@ -166,14 +166,14 @@ export const manniConfig = {
     title: "A few things I didn’t want to forget",
     /** `fit: "whole"` shows the full image (best for message screenshots). */
     photos: [
-      { src: photo01.url, alt: "A saved message: I love you no matter what", caption: "No matter what — I never took that lightly", fit: "whole" },
-      { src: photo02.url, alt: "A saved message about loving forever", caption: "Forever, written without hesitation", fit: "whole" },
-      { src: photo03.url, alt: "A saved message about always being by your side", caption: "Always by my side, even in the teasing", fit: "whole" },
-      { src: photo04.url, alt: "A saved message: I'd never leave you, never forget you", caption: "Never forgotten. Not for a single day", fit: "whole" },
-      { src: photo05.url, alt: "A saved message: you're always on my mind", caption: "Still, and quietly, on my mind", fit: "whole" },
-      { src: photo06.url, alt: "A saved message about two hurt people falling in love", caption: "Some things happen for a reason we only see later", fit: "whole" },
-      { src: photo07.url, alt: "The moon and Venus close together in a dusk sky", caption: "If moon and Venus can meet, then why not us", fit: "whole" },
-      { src: photo08.url, alt: "A soft animated frame that reminds me of you", caption: "This one always made me think of you" },
+      { src: photo01, alt: "A saved message: I love you no matter what", caption: "No matter what — I never took that lightly", fit: "whole" },
+      { src: photo02, alt: "A saved message about loving forever", caption: "Forever, written without hesitation", fit: "whole" },
+      { src: photo03, alt: "A saved message about always being by your side", caption: "Always by my side, even in the teasing", fit: "whole" },
+      { src: photo04, alt: "A saved message: I'd never leave you, never forget you", caption: "Never forgotten. Not for a single day", fit: "whole" },
+      { src: photo05, alt: "A saved message: you're always on my mind", caption: "Still, and quietly, on my mind", fit: "whole" },
+      { src: photo06, alt: "A saved message about two hurt people falling in love", caption: "Some things happen for a reason we only see later", fit: "whole" },
+      { src: photo07, alt: "The moon and Venus close together in a dusk sky", caption: "If moon and Venus can meet, then why not us", fit: "whole" },
+      { src: photo08, alt: "A soft animated frame that reminds me of you", caption: "This one always made me think of you" },
     ],
   },
   distance: {
@@ -359,7 +359,7 @@ export const manniConfig = {
 
   audio: {
     /** Hidden playlist — order is shuffled at runtime and titles are never shown. */
-    tracks: [trackA.url, trackB.url, trackD.url],
+    tracks: [trackA, trackB, trackD],
     available: true,
     label: "Background music",
     shuffleLabel: "Play something else",
