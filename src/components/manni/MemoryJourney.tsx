@@ -368,6 +368,14 @@ export function MemoryJourney() {
               {!canUnlock && <p className="text-xs text-primary-foreground/60">Answer the memory quiz above to turn the key.</p>}
             </div>
           )}
+          {boxOpen && (
+            <article className="letter-sheet mx-auto mt-12 max-w-2xl p-7 text-left text-foreground sm:p-10">
+              <h3 className="font-serif text-3xl">{c.lockedBox.letter.title}</h3>
+              <div className="mt-7 space-y-6 text-base leading-8 text-foreground/80">
+                {c.lockedBox.letter.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+            </article>
+          )}
         </div>
       </Chapter>
 

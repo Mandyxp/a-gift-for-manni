@@ -11,6 +11,7 @@ import photo05 from "@/assets/IMG_3461.jpg";
 import photo06 from "@/assets/IMG_3465.jpg";
 import photo07 from "@/assets/IMG_3603.jpeg";
 import photo08 from "@/assets/IMG_3531.jpg";
+import photo09 from "@/assets/15E26089-9A3B-42EC-8B81-E1109D2C9BFE.png";
 import trackA from "@/assets/track-1984aea3.mp3";
 import trackB from "@/assets/track-3a7af93a.mp3";
 import trackD from "@/assets/track-e2853fb0.mp3";
@@ -128,9 +129,17 @@ export const manniConfig = {
   lockedBox: {
     title: "The 06 · 12 folder",
     lockedText: "Two small pieces, one quiet lock.",
-    
     openLabel: "Turn the key",
     openedText: "Some things are kept safe until we are ready to hold them.",
+    letter: {
+      title: "A little letter",
+      paragraphs: [
+        "I hope you’ll understand me and not make a joke out of the effort I’m putting in 🥺. And please, don’t let anyone else’s opinion decide whether you should talk to me or not.",
+        "I know you’ve said, “It’s over, dude,” and I understand that. I’m not asking you to love me again or change how you feel. I just feel like some things deserve one honest conversation, and I want the chance to explain my side properly.",
+        "If what we had was ever real to you, I’m only asking for a little understanding and one conversation. I still care about you a lot, and I don’t want to be pushed away without at least being heard.",
+        "Maybe someday, years from now, our paths will cross again. I just hope when that happens, we won’t be strangers who never got the chance to properly talk. 🥺",
+      ],
+    },
   },
   letters: [
     {
@@ -250,7 +259,7 @@ export const manniConfig = {
     intro: "Some things are easier to say when you finally have enough space to say them properly.",
     openLabel: "There’s more…",
     closeLabel: "Fold this away",
-    photo: "/assets/photos/personal-message.jpg",
+    photo: photo09,
     photoLabel: "A photo I kept",
     sections: [
       {
@@ -333,7 +342,7 @@ export const manniConfig = {
         id: "what-you-became",
         title: "What you became to me",
         visualType: "photo",
-        image: "/assets/photos/personal-message.jpg",
+        image: photo09,
         scraps: ["never just a chapter", "someone I loved", "someone I cared about deeply", "a part of my life"],
         lines: [
           "You were never just a chapter I wanted to erase because it ended differently than I hoped.",
